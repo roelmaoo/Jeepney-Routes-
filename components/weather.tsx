@@ -26,10 +26,10 @@ export default function Weather() {
     };
 
     fetchData();
-  }, [weatherAPIkey]);
+  }, []);
 
   return (
-    <div className="bg-white w-100 h-50 rounded-xl p-5 shadow-lg">
+    <div className="bg-white w-100 h-50 rounded-xl p-5 shadow-lg flex flex-col justify-between">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <svg
@@ -66,6 +66,7 @@ export default function Weather() {
           </p>
         </div>
       </div>
+      <p>{weatherData?.location.localtime}</p>
     </div>
   );
 }
