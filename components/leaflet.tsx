@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Polyline } from "react-leaflet";
+import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Lugar } from "@/data/routes";
 
@@ -9,6 +10,8 @@ interface LeafletProps {
 }
 
 export default function Leaflet({ routes }: LeafletProps) {
+  const position: LatLngExpression = [10.7202, 122.5621];
+
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -20,7 +23,7 @@ export default function Leaflet({ routes }: LeafletProps) {
   return (
     <MapContainer
       key={routes.length}
-      center={[10.7202, 122.5621]}
+      center={position}
       zoom={13}
       className="h-full w-full"
     >
