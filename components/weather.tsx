@@ -82,6 +82,7 @@ export default function Weather() {
         </div>
       </div>
       <p>{weatherData?.location.localtime}</p>
+      <p>test</p>
     </div>
   );
 }
