@@ -19,6 +19,7 @@ export default function Leaflet({ routes }: LeafletProps) {
 
   return (
     <MapContainer
+      key={routes.length}
       center={[10.7202, 122.5621]}
       zoom={13}
       className="h-full w-full"
