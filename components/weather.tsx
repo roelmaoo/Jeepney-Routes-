@@ -3,7 +3,22 @@
 import { useState, useEffect } from "react";
 
 export default function Weather() {
-  const [weatherData, setWeatherData] = useState(null);
+  interface WeatherResponse {
+    location: {
+      name: string;
+      region: string;
+      localtime: string;
+      country: string;
+    };
+    current: {
+      temp_c: number;
+      condition: {
+        text: string;
+      };
+    };
+  }
+
+  const [weatherData, setWeatherData] = useState<WeatherResponse | null>(null);
   const weatherAPIkey = process.env?.NEXT_PUBLIC_WEATHER_API_KEY;
 
   useEffect(() => {
