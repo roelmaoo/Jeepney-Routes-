@@ -25,7 +25,7 @@ export default function Weather() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://api.weatherapi.com/v1/current.json?key=${weatherAPIkey}&q=iloilo&aqi=no`,
+          `https://api.weatherapi.com/v1/current.json?key=${weatherAPIkey}&q=iloilo&aqi=no`,
         );
 
         const data = await response.json();
@@ -82,6 +82,7 @@ export default function Weather() {
         </div>
       </div>
       <p>{weatherData?.location.localtime}</p>
+      <p>test</p>
     </div>
   );
 }
