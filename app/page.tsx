@@ -33,7 +33,7 @@ export default function Homepage() {
         <Weather className="bg-white w-100 h-50 rounded-xl p-5 shadow-lg" />
       </div> */}
 
-      <div className="fixed bottom-0 m-5 overflow-scroll h-50">
+      <div className="fixed bottom-0 left-0 right-0  m-2 rounded-md shadow-2xl overflow-auto h-60">
         <RouteBar routes={routes} onToggle={handleToggle} />
       </div>
     </section>

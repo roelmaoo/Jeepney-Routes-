@@ -7,7 +7,7 @@ interface RouteBarProps {
 
 export default function RouteBar({ routes, onToggle }: RouteBarProps) {
   return (
-    <div className="flex flex-col bg-[#F3F3F3] shadow-2xl rounded-lg overflow-auto">
+    <div className="flex flex-col bg-[#F3F3F3] shadow-2xl">
       <div className="flex flex-col gap-5 overflow-auto p-5">
         {routes.map((route) => (
           <button
