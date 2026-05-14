@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function Weather() {
+export default function Weather({ className }: { className?: string }) {
   interface WeatherResponse {
     location: {
       name: string;
@@ -41,14 +41,14 @@ export default function Weather() {
     };
 
     fetchData();
-  }, []);
+  }, [weatherAPIkey]);
 
   return (
-    <div className="bg-white w-100 h-50 rounded-xl p-5 shadow-lg flex flex-col justify-between">
+    <div className={className}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="https://www.w3.org/2000/svg"
             width="50"
             height="50"
             viewBox="0 0 24 24"
