@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "leaflet-routing-machine";
 import { Lugar } from "@/data/routes";
 
 interface LeafletProps {

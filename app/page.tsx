@@ -34,7 +34,7 @@ export default function Homepage() {
       </div>
 
       <div
-        className="fixed bottom-0 left-0 right-0 md:left-auto m-2 rounded-md shadow-2xl overflow-auto h-60
+        className="fixed bottom-0 left-0 right-0 m-2 md:left-auto md:m-10 rounded-md md:rounded-xl shadow-2xl overflow-auto h-60
       [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full"
       >
         <RouteBar routes={routes} onToggle={handleToggle} />
