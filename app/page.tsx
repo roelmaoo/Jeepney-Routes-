@@ -29,11 +29,14 @@ export default function Homepage() {
         <Leaflet routes={routes} />
       </div>
 
-      {/* <div className="fixed bottom-10 left-10">
+      <div className="fixed bottom-10 left-10">
         <Weather className="bg-white w-100 h-50 rounded-xl p-5 shadow-lg" />
-      </div> */}
+      </div>
 
-      <div className="fixed bottom-0 left-0 right-0  m-2 rounded-md shadow-2xl overflow-auto h-60">
+      <div
+        className="fixed bottom-0 left-0 right-0 md:left-auto m-2 rounded-md shadow-2xl overflow-auto h-60
+      [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full"
+      >
         <RouteBar routes={routes} onToggle={handleToggle} />
       </div>
     </section>
