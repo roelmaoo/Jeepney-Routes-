@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function Dropdown() {
   return (
-    <div className="w-full mx-auto rounded-md h-100 bg-white">
+    <div className="rounded-md fixed left-0 right-0 top-0 m-2 md:m-10 h-80 bg-white ">
       <nav>
         <li>hi</li>
         <li>hello</li>
