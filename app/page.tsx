@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Weather from "../components/weather";
 import RouteBar from "@/components/routebar";
-import Dropdown from "@/components/dropdown";
+import Hamburger from "@/components/dropdown";
 import { ILOILO_ROUTES, Lugar } from "@/data/routes"; // Import your type and data
 
 const Leaflet = dynamic(() => import("@/components/leaflet"), {
@@ -15,6 +15,7 @@ const Leaflet = dynamic(() => import("@/components/leaflet"), {
 
 export default function Homepage() {
   const [routes, setRoutes] = useState<Lugar[]>(ILOILO_ROUTES);
+  const [isDropDown, setIsDropdown] = useState(false);
 
   const handleToggle = (id: string) => {
     setRoutes((prevRoutes) =>
@@ -26,8 +27,8 @@ export default function Homepage() {
 
   return (
     <section className="text-black text-sm">
-      <div className="fixed top-0 right-0 z-50">
-        <Dropdown />
+      <div className="fixed top-0 right-0 z-50 m-2 md:m-10 lg:hidden">
+        <Hamburger />
       </div>
 
       <div className="h-screen w-screen fixed ">
