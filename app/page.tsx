@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Weather from "../components/weather";
 import RouteBar from "@/components/routebar";
+import Dropdown from "@/components/dropdown";
 import { ILOILO_ROUTES, Lugar } from "@/data/routes"; // Import your type and data
 
 const Leaflet = dynamic(() => import("@/components/leaflet"), {
@@ -25,6 +26,10 @@ export default function Homepage() {
 
   return (
     <section className="text-black text-sm">
+      <div className="fixed top-0 right-0 z-50">
+        <Dropdown />
+      </div>
+
       <div className="h-screen w-screen fixed ">
         <Leaflet routes={routes} />
       </div>
@@ -34,7 +39,7 @@ export default function Homepage() {
       </div>
 
       <div
-        className="fixed bottom-0 left-0 right-0 m-2 md:left-auto md:m-10 rounded-md md:rounded-xl shadow-2xl overflow-auto h-60
+        className="fixed bottom-0 left-0 right-0 m-2 lg:left-auto md:m-10 rounded-md md:rounded-xl shadow-2xl overflow-auto h-60
       [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full"
       >
         <RouteBar routes={routes} onToggle={handleToggle} />
