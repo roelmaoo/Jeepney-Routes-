@@ -1,37 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Weather({ className }: { className?: string }) {
+  // 1. Updated interface to match Open-Meteo's JSON response format
   interface WeatherResponse {
-    location: {
-      name: string;
-      region: string;
-      localtime: string;
-      country: string;
-    };
     current: {
-      temp_c: number;
-      condition: {
-        text: string;
-      };
+      time: string;
+      temperature_2m: number;
     };
   }
 
   const [weatherData, setWeatherData] = useState<WeatherResponse | null>(null);
-  const weatherAPIkey = process.env?.NEXT_PUBLIC_WEATHER_API_KEY;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Open-Meteo endpoint with Iloilo's coordinates. No API key needed!
         const response = await fetch(
-          `https://api.weatherapi.com/v1/current.json?key=${weatherAPIkey}&q=iloilo&aqi=no`,
+          "https://api.open-meteo.com/v1/forecast?latitude=10.7202&longitude=122.5621&current=temperature_2m",
         );
 
         const data = await response.json();
 
         if (data.error) {
-          console.log("API Error:", data.error.message);
+          console.log("API Error:", data.reason);
         } else {
           setWeatherData(data);
         }
@@ -41,7 +34,18 @@ export default function Weather({ className }: { className?: string }) {
     };
 
     fetchData();
-  }, [weatherAPIkey]);
+  }, []);
+
+  // Helper function to format Open-Meteo's '2026-05-18T23:00' ISO timestamp into something clean
+  const formatLocalTime = (isoString?: string) => {
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    return date.toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
 
   return (
     <div className={className}>
@@ -64,25 +68,31 @@ export default function Weather({ className }: { className?: string }) {
             <path d="M6.213 4.81l.094 .083l.7 .7a1 1 0 0 1 -1.32 1.497l-.094 -.083l-.7 -.7a1 1 0 0 1 1.217 -1.567l.102 .07z" />
             <path d="M19.107 4.893a1 1 0 0 1 .083 1.32l-.083 .094l-.7 .7a1 1 0 0 1 -1.497 -1.32l.083 -.094l.7 -.7a1 1 0 0 1 1.414 0z" />
             <path d="M12 2a1 1 0 0 1 .993 .883l.007 .117v1a1 1 0 0 1 -1.993 .117l-.007 -.117v-1a1 1 0 0 1 1 -1z" />
-            <path d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+            <path d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.783z" />
           </svg>
 
           <div className="flex flex-col leading-4">
-            <p className="text-xl font-semibold">
-              {weatherData?.location.region}, {weatherData?.location.name}
-            </p>
-            <p className="text-[#686868]">{weatherData?.location.country}</p>
+            {/* Hardcoding the location names since Open-Meteo only returns raw numbers */}
+            <p className="text-xl font-semibold">Iloilo City, Iloilo</p>
+            <p className="text-[#686868]">Philippines</p>
           </div>
         </div>
 
         <div>
           <p className="text-4xl font-semibold">
-            {weatherData?.current.temp_c}°
+            {/* Open-Meteo maps temp to temperature_2m */}
+            {weatherData
+              ? Math.round(weatherData.current.temperature_2m)
+              : "--"}
+            °
           </p>
         </div>
       </div>
-      <p>{weatherData?.location.localtime}</p>
-      <p>test</p>
+
+      {/* Formatted time string displayed here */}
+      <p className="text-sm text-gray-500 mt-2">
+        Local Time: {formatLocalTime(weatherData?.current.time)}
+      </p>
     </div>
   );
 }
