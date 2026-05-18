@@ -34,8 +34,8 @@ export default function Leaflet({ routes }: LeafletProps) {
         <Polyline
           key={route.id}
           pathOptions={{
-            color: route.active ? "blue" : "transparent", // Hide if not active
-            weight: 5,
+            color: route.active ? "blue" : "transparent",
+            weight: 2,
           }}
           positions={route.route}
         />
