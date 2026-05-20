@@ -38,17 +38,21 @@ export default function Weather({ className }: { className?: string }) {
   const formatLocalTime = (isoString?: string) => {
     if (!isoString) return "";
 
-    // Open-Meteo sends "YYYY-MM-DDTHH:MM". Adding "Z" at the end forces the Date
-    // constructor to parse it cleanly as a strict ISO timestamp.
-    const date = new Date(`${isoString}Z`);
+    // Open-Meteo returns: "2026-05-20T23:45"
+    // Splitting by "T" gives us ["2026-05-20", "23:45"]
+    const timePart = isoString.split("T")[1]; // "23:45"
+    if (!timePart) return "";
 
-    return date.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-      // Forces the browser to display it exactly as the Philippine time returned by the API
-      timeZone: "Asia/Manila",
-    });
+    const [hoursStr, minutesStr] = timePart.split(":");
+    let hours = parseInt(hoursStr, 10);
+    const minutes = minutesStr;
+
+    // Convert 24-hour format to 12-hour format
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // The hour '0' should be '12'
+
+    return `${hours}:${minutes} ${ampm}`;
   };
 
   return (
