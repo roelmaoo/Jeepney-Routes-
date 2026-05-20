@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 export default function Weather({ className }: { className?: string }) {
-  // 1. Updated interface to match Open-Meteo's JSON response format
   interface WeatherResponse {
     current: {
       time: string;
@@ -16,9 +15,9 @@ export default function Weather({ className }: { className?: string }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Open-Meteo endpoint with Iloilo's coordinates. No API key needed!
+        // ADDED: &timezone=Asia%2FManila tells the API to return the time shifted to Philippine Time
         const response = await fetch(
-          "https://api.open-meteo.com/v1/forecast?latitude=10.7202&longitude=122.5621&current=temperature_2m",
+          "https://api.open-meteo.com/v1/forecast?latitude=10.7202&longitude=122.5621&current=temperature_2m&timezone=Asia%2FManila",
         );
 
         const data = await response.json();
@@ -38,12 +37,22 @@ export default function Weather({ className }: { className?: string }) {
 
   const formatLocalTime = (isoString?: string) => {
     if (!isoString) return "";
-    const date = new Date(isoString);
-    return date.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
+
+    // Open-Meteo returns: "2026-05-20T23:45"
+    // Splitting by "T" gives us ["2026-05-20", "23:45"]
+    const timePart = isoString.split("T")[1]; // "23:45"
+    if (!timePart) return "";
+
+    const [hoursStr, minutesStr] = timePart.split(":");
+    let hours = parseInt(hoursStr, 10);
+    const minutes = minutesStr;
+
+    // Convert 24-hour format to 12-hour format
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // The hour '0' should be '12'
+
+    return `${hours}:${minutes} ${ampm}`;
   };
 
   return (
