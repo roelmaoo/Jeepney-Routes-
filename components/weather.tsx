@@ -72,7 +72,6 @@ export default function Weather({ className }: { className?: string }) {
           </svg>
 
           <div className="flex flex-col leading-4">
-            {/* Hardcoding the location names since Open-Meteo only returns raw numbers */}
             <p className="text-xl font-semibold">Iloilo City, Iloilo</p>
             <p className="text-[#686868]">Philippines</p>
           </div>
@@ -80,7 +79,6 @@ export default function Weather({ className }: { className?: string }) {
 
         <div>
           <p className="text-4xl font-semibold">
-            {/* Open-Meteo maps temp to temperature_2m */}
             {weatherData
               ? Math.round(weatherData.current.temperature_2m)
               : "--"}
@@ -89,9 +87,8 @@ export default function Weather({ className }: { className?: string }) {
         </div>
       </div>
 
-      {/* Formatted time string displayed here */}
       <p className="text-sm text-gray-500 mt-2">
-        Local Time: {formatLocalTime(weatherData?.current.time)}
+        Time: {formatLocalTime(weatherData?.current.time)}
       </p>
     </div>
   );
