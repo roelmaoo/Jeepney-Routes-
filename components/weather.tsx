@@ -36,7 +36,6 @@ export default function Weather({ className }: { className?: string }) {
     fetchData();
   }, []);
 
-  // Helper function to format Open-Meteo's '2026-05-18T23:00' ISO timestamp into something clean
   const formatLocalTime = (isoString?: string) => {
     if (!isoString) return "";
     const date = new Date(isoString);
