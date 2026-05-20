@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 export default function Weather({ className }: { className?: string }) {
-  // 1. Updated interface to match Open-Meteo's JSON response format
   interface WeatherResponse {
     current: {
       time: string;
@@ -16,9 +15,9 @@ export default function Weather({ className }: { className?: string }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Open-Meteo endpoint with Iloilo's coordinates. No API key needed!
+        // ADDED: &timezone=Asia%2FManila tells the API to return the time shifted to Philippine Time
         const response = await fetch(
-          "https://api.open-meteo.com/v1/forecast?latitude=10.7202&longitude=122.5621&current=temperature_2m",
+          "https://api.open-meteo.com/v1/forecast?latitude=10.7202&longitude=122.5621&current=temperature_2m&timezone=Asia%2FManila",
         );
 
         const data = await response.json();
@@ -38,11 +37,17 @@ export default function Weather({ className }: { className?: string }) {
 
   const formatLocalTime = (isoString?: string) => {
     if (!isoString) return "";
-    const date = new Date(isoString);
+
+    // Open-Meteo sends "YYYY-MM-DDTHH:MM". Adding "Z" at the end forces the Date
+    // constructor to parse it cleanly as a strict ISO timestamp.
+    const date = new Date(`${isoString}Z`);
+
     return date.toLocaleString("en-US", {
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
+      // Forces the browser to display it exactly as the Philippine time returned by the API
+      timeZone: "Asia/Manila",
     });
   };
 
