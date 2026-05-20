@@ -8,7 +8,7 @@ interface RouteBarProps {
 export default function RouteBar({ routes, onToggle }: RouteBarProps) {
   return (
     <div className="flex flex-col bg-[#F3F3F3] shadow-2xl">
-      <div className="flex flex-col gap-5 p-5">
+      <div className="flex flex-col gap-2 p-3 md:p-2">
         {routes.map((route) => (
           <button
             key={route.id}
