@@ -21,52 +21,50 @@ export default function Homepage() {
   };
 
   return (
-    <section className="relative h-screen w-screen overflow-hidden overscroll-none text-gray-900">
-      {/* Map Layer */}
+    // Use h-dvh (Dynamic Viewport Height) to prevent mobile browser issues
+    <section className="relative h-dvh w-screen overflow-hidden overscroll-none text-gray-900">
       <div className="absolute inset-0 z-0">
         <Leaflet routes={routes} />
       </div>
 
-      {/* Top Left: Copyright UI */}
+      {/* Top Left: Copyright */}
       <div className="absolute top-6 left-6 z-20">
         <div className="bg-white/95 backdrop-blur border border-gray-200 rounded-lg px-3 py-1.5 shadow-sm text-[10px] font-medium text-gray-400 uppercase tracking-wider">
           © 2026 Iloilo Transit
         </div>
       </div>
 
-      {/* Top Right: Weather Only */}
+      {/* Top Right: Weather */}
       <div className="absolute top-6 right-6 z-20">
         <Weather className="w-80 bg-white/95 backdrop-blur border border-gray-200 rounded-2xl shadow-sm" />
       </div>
 
-      {/* Bottom Drawer: Routes */}
-      {/* Bottom Drawer: Routes */}
+      {/* Bottom Drawer */}
       <div
-        className={`absolute bottom-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
-          isDrawerOpen ? "translate-y-0" : "translate-y-[calc(100%-60px)]"
-        } pb-[env(safe-area-inset-bottom)]`}
+        className={`absolute bottom-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out ${
+          isDrawerOpen ? "translate-y-0" : "translate-y-[calc(100%-70px)]" // Increased offset to 70px
+        }`}
       >
-        {/* Toggle Handle - Fixed height and visible background */}
-        <div className="flex justify-center">
+        {/* Toggle Handle - Give it a dedicated height and safe-area padding */}
+        <div className="flex justify-center pb-[env(safe-area-inset-bottom)]">
           <button
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-            className="bg-white border-t border-x border-gray-200 px-8 py-3 rounded-t-2xl shadow-lg hover:bg-gray-50 transition-colors z-50"
+            className="bg-white border-t border-x border-gray-200 px-10 py-4 rounded-t-2xl shadow-lg hover:bg-gray-50 transition-colors"
           >
             <svg
-              width="20"
-              height="12"
+              width="24"
+              height="16"
               viewBox="0 0 20 12"
               fill="none"
               stroke="currentColor"
               strokeWidth="3"
-              className="text-gray-900" // Made icon darker for better visibility
+              className="text-gray-900"
             >
               <path d={isDrawerOpen ? "M2 3L10 11 18 3" : "M18 9L10 1 2 9"} />
             </svg>
           </button>
         </div>
 
-        {/* Drawer Content */}
         <div className="bg-white border-t border-gray-200 h-80 shadow-2xl overflow-y-auto">
           <div className="p-8 w-full">
             {/* Header Section */}
