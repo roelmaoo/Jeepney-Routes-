@@ -27,6 +27,7 @@ export default function Leaflet({ routes }: LeafletProps) {
       center={position}
       zoom={13}
       className="h-full w-full"
+      zoomControl={false}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
