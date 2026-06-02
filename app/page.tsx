@@ -21,7 +21,7 @@ export default function Homepage() {
   };
 
   return (
-    <section className="relative h-screen w-screen overflow-hidden text-gray-900">
+    <section className="relative h-screen w-screen overflow-hidden overscroll-none text-gray-900">
       {/* Map Layer */}
       <div className="absolute inset-0 z-0">
         <Leaflet routes={routes} />
