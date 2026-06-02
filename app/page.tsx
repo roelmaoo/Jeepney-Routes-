@@ -40,14 +40,17 @@ export default function Homepage() {
       </div>
 
       {/* Bottom Drawer: Routes */}
+      {/* Bottom Drawer: Routes */}
       <div
-        className={`absolute bottom-0 left-0 right-0 z-30 transition-transform duration-300 ease-in-out ${isDrawerOpen ? "translate-y-0" : "translate-y-[calc(100%-48px)]"}`}
+        className={`absolute bottom-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+          isDrawerOpen ? "translate-y-0" : "translate-y-[calc(100%-60px)]"
+        } pb-[env(safe-area-inset-bottom)]`}
       >
-        {/* Toggle Handle */}
+        {/* Toggle Handle - Fixed height and visible background */}
         <div className="flex justify-center">
           <button
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-            className="bg-white border-t border-x border-gray-200 px-8 py-2 rounded-t-2xl shadow-sm hover:bg-gray-50 transition-colors"
+            className="bg-white border-t border-x border-gray-200 px-8 py-3 rounded-t-2xl shadow-lg hover:bg-gray-50 transition-colors z-50"
           >
             <svg
               width="20"
@@ -55,8 +58,8 @@ export default function Homepage() {
               viewBox="0 0 20 12"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.5"
-              className="text-gray-400"
+              strokeWidth="3"
+              className="text-gray-900" // Made icon darker for better visibility
             >
               <path d={isDrawerOpen ? "M2 3L10 11 18 3" : "M18 9L10 1 2 9"} />
             </svg>
