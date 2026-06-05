@@ -10,4 +10,7 @@ Why the design?
 - Next.js, React.js, TailwindCSS
 - Leaflet for Interactive Map Library
 
+[Deployment]
+- Vercel
+
 *All route data are taken from https://shemaegomez.com/iloilo-city-jeepney-routes*
