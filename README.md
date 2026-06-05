@@ -7,7 +7,7 @@ Why the design?
 - The whole map covering the site screen, while some tiles can be open/closed like the routes.
 
 [Tech Stack]
-- Next.js, React.js, TailwindCSS
+- Next.js, React.js, Vite, TailwindCSS
 - Leaflet for Interactive Map Library
 
 [Deployment]
