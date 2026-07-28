@@ -1,42 +1,60 @@
 "use client";
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Polyline } from "react-leaflet";
-import { LatLngExpression } from "leaflet";
+import { useEffect, useMemo } from "react";
+import { MapContainer, TileLayer, Polyline, useMap } from "react-leaflet";
+import { LatLngBounds, LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "leaflet-routing-machine";
 import { Lugar } from "@/data/routes";
 
 interface LeafletProps {
   routes: Lugar[];
 }
 
+function FitActiveRoutes({ routes }: LeafletProps) {
+  const map = useMap();
+  const activePoints = useMemo(
+    () => routes.filter((route) => route.active).flatMap((route) => route.route),
+    [routes],
+  );
+
+  useEffect(() => {
+    if (!activePoints.length) return;
+
+    const bounds = new LatLngBounds(activePoints);
+    map.fitBounds(bounds, {
+      animate: true,
+      duration: 0.8,
+      paddingTopLeft: [28, 120],
+      paddingBottomRight: [28, 260],
+      maxZoom: 15,
+    });
+  }, [activePoints, map]);
+
+  return null;
+}
+
 export default function Leaflet({ routes }: LeafletProps) {
   const position: LatLngExpression = [10.7202, 122.5621];
 
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return <div className="h-full w-full bg-gray-200" />;
-
   return (
     <MapContainer
-      key={routes.length}
       center={position}
       zoom={13}
       className="h-full w-full"
       zoomControl={false}
+      attributionControl={false}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <FitActiveRoutes routes={routes} />
 
       {routes.map((route) => (
         <Polyline
           key={route.id}
           pathOptions={{
-            color: route.active ? "blue" : "transparent",
-            weight: 2,
+            color: route.color,
+            opacity: route.active ? 0.95 : 0,
+            weight: route.active ? 6 : 0,
+            lineCap: "round",
+            lineJoin: "round",
           }}
           positions={route.route}
         />
