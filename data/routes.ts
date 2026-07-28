@@ -3,15 +3,26 @@ export interface Lugar {
   name: string;
   description: string;
   active: boolean;
+  color: string;
   route: [number, number][];
+}
+
+export interface PlaceSuggestion {
+  id: string;
+  label: string;
+  area: string;
+  description: string;
+  keywords: string[];
+  routeIds: string[];
 }
 
 export const ILOILO_ROUTES: Lugar[] = [
   {
     id: "1",
     name: "CALAPARAN CALUMPANG – ILOILO CITY PROPER",
-    description: "VILLA PLAZA TO CITY PROPER VIA CALUMPANG LOOP",
+    description: "Villa Plaza to City Proper via Calumpang Loop",
     active: false,
+    color: "#2563eb",
     route: [
       [10.68706300207493, 122.51663000695484],
       [10.680269053153129, 122.5174440483621],
@@ -28,9 +39,10 @@ export const ILOILO_ROUTES: Lugar[] = [
   },
   {
     id: "2",
-    name: "MOLO - CITY PROPER",
-    description: "MOLO TO CITY PROPER VIA BALUARTE LOOP",
+    name: "MOLO – CITY PROPER",
+    description: "Molo to City Proper via Baluarte Loop",
     active: false,
+    color: "#f97316",
     route: [
       [10.69700209054978, 122.54616519655104],
       [10.695983701267465, 122.54447138864825],
@@ -80,9 +92,10 @@ export const ILOILO_ROUTES: Lugar[] = [
   },
   {
     id: "3",
-    name: "MOHON - ILOILO CITY PROPER",
-    description: "MOHON TO CITY PROPER LOOP",
+    name: "MOHON – ILOILO CITY PROPER",
+    description: "Mohon to City Proper Loop",
     active: false,
+    color: "#10b981",
     route: [
       [10.68706300207493, 122.51663000695484],
       [10.680269053153129, 122.5174440483621],
@@ -96,5 +109,56 @@ export const ILOILO_ROUTES: Lugar[] = [
       [10.693254499320306, 122.55869245495843],
       [10.696416387263763, 122.56901043009681],
     ],
+  },
+];
+
+export const ILOILO_PLACES: PlaceSuggestion[] = [
+  {
+    id: "city-proper",
+    label: "Iloilo City Proper",
+    area: "Downtown Iloilo",
+    description: "Best for downtown offices, markets, old CBD, and transfer points.",
+    keywords: ["city proper", "downtown", "iloilo city", "central market", "cbd", "jm basa", "plaza libertad"],
+    routeIds: ["1", "2", "3"],
+  },
+  {
+    id: "molo-plaza",
+    label: "Molo Plaza",
+    area: "Molo District",
+    description: "Use the Molo line for plaza, church, Baluarte, and nearby streets.",
+    keywords: ["molo", "molo plaza", "molo church", "baluarte", "molo mansion"],
+    routeIds: ["2"],
+  },
+  {
+    id: "baluarte",
+    label: "Baluarte",
+    area: "Molo District",
+    description: "Served by the Molo–City Proper route loop.",
+    keywords: ["baluarte", "molo baluarte", "baluarte loop"],
+    routeIds: ["2"],
+  },
+  {
+    id: "villa-plaza",
+    label: "Villa Plaza",
+    area: "Arevalo / Villa",
+    description: "Take Calaparan Calumpang or Mohon routes toward City Proper.",
+    keywords: ["villa", "villa plaza", "arevalo", "villa beach"],
+    routeIds: ["1", "3"],
+  },
+  {
+    id: "calumpang",
+    label: "Calumpang",
+    area: "Molo / Villa side",
+    description: "Served by the Calaparan Calumpang route to City Proper.",
+    keywords: ["calumpang", "calaparan", "calumpang loop"],
+    routeIds: ["1"],
+  },
+  {
+    id: "mohon-terminal",
+    label: "Mohon Terminal",
+    area: "Arevalo",
+    description: "Board the Mohon–Iloilo City Proper loop from the terminal area.",
+    keywords: ["mohon", "mohon terminal", "terminal", "transport terminal"],
+    routeIds: ["3"],
   },
 ];
