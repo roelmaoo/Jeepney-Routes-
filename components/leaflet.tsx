@@ -23,8 +23,8 @@ function FitActiveRoutes({ routes }: LeafletProps) {
     map.fitBounds(bounds, {
       animate: true,
       duration: 0.8,
-      paddingTopLeft: [28, 120],
-      paddingBottomRight: [28, 260],
+      paddingTopLeft: [440, 40],
+      paddingBottomRight: [40, 40],
       maxZoom: 15,
     });
   }, [activePoints, map]);
@@ -51,8 +51,8 @@ export default function Leaflet({ routes }: LeafletProps) {
           key={route.id}
           pathOptions={{
             color: route.color,
-            opacity: route.active ? 0.95 : 0,
-            weight: route.active ? 6 : 0,
+            opacity: route.active ? 0.9 : 0,
+            weight: route.active ? 5 : 0,
             lineCap: "round",
             lineJoin: "round",
           }}

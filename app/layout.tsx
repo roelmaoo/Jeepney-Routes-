@@ -3,7 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Iloilo Jeepney Routes",
-  description: "Find jeepney route suggestions across Iloilo City.",
+  description:
+    "Find jeepney route suggestions across Iloilo City. Search places, view routes on the map, and plan your commute.",
 };
 
 export default function RootLayout({
